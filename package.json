@@ -1,0 +1,24 @@
+{
+  "name": "lapmart",
+  "version": "1.0.0",
+  "description": "E-commerce website for Laptops and its accessories",
+  "main": "server.js",
+  "scripts": {
+    "start": "npm server",
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \" npm run client \" \"npm run server \""
+  },
+  "author": "Shreyas Kanchan",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.3.0",
+    "config": "^3.3.3",
+    "express": "^4.17.1",
+    "express-validator": "^6.9.2",
+    "mongoose": "^5.11.11",
+    "nodemon": "^2.0.7",
+    "react-router-dom": "^5.2.0",
+    "requests": "^0.3.0"
+  }
+}
