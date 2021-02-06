@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { removeItemFromCart} from '../../actions/cart';
 import { connect } from 'react-redux';
-const CartItems = ({ removeItemFromCart,cart:{cart} }) => {
+const Cart = ({ removeItemFromCart,cart:{cart} }) => {
     const totalPrice=(items)=>{
         let sum=0;
         
@@ -22,10 +22,10 @@ const CartItems = ({ removeItemFromCart,cart:{cart} }) => {
     )
 }
 
-CartItems.propTypes = {
+Cart.propTypes = {
     cart:PropTypes.object.isRequired
 }
 const mapStateToProps = state => ({
     cart:state.cart
 });
-export default connect(mapStateToProps,{removeItemFromCart})(CartItems)
+export default connect(mapStateToProps,{removeItemFromCart})(Cart)
