@@ -1,19 +1,16 @@
 const express=require('express');
 const router=express.Router();
-const { check, validationResult }=require('express-validator');
-
-const Item=require('../../models/Items');
-
+const Item=require('../../models/item');
 const config=require('config');
 
 
-// @route GET api/items
+// @route GET api/item
 // @access public
 // @desc Display all the details of the items in the catlog
 
 router.get('/',async(req,res)=>{
     try {
-
+        
         const { category } =req.body;
         let items={};
         if(category){
@@ -40,7 +37,7 @@ router.get('/',async(req,res)=>{
 });
 
 
-// @route GET api/items/:id
+// @route GET api/item/:id
 // @access public
 // @desc will query based on their id
 
@@ -48,11 +45,7 @@ router.get('/:id',async(req,res)=>{
     try {
         const id=req.params.id;
         const item=await Item.findOne({_id:id});
-        //console.log(item);
         return res.json(item);
-          
-        
-        
     } catch (err) {
         console.log(err.message);
         if(err.kind==='ObjectId'){

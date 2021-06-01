@@ -4,7 +4,7 @@ import { GET_ITEMS, GET_ITEM ,ITEM_ERROR} from './types';
 
 export const getItems =() =>async dispatch =>{
     try {
-        const res =await axios.get('/api/items');
+        const res =await axios.get('/api/item');
         dispatch({
             type:GET_ITEMS,
             payload:res.data
@@ -22,7 +22,7 @@ export const getItems =() =>async dispatch =>{
 }
 export const getItem =(id) =>async dispatch =>{
     try {
-        const res =await axios.get(`/api/items/${id}`);
+        const res =await axios.get(`/api/item/${id}`);
         dispatch({
             type:GET_ITEM,
             payload:res.data
