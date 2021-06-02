@@ -210,7 +210,7 @@ router.delete('/removeitem/:itemId',async(req,res)=>{
         // Finding the cart using session
         cart= await Cart.findOne({_id:cartid});
         
-
+       
         // Reducing the cart count by 1
         cart.count=cart.count-1;
         
