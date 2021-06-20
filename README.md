@@ -1,6 +1,9 @@
 # LapMart
 LapMart is a full stack E-commerce web application for Laptop and its Accessories using React.js and Node.js/Express.
 
+## Live Demo
+Try the application live at https://lapmart-demo.herokuapp.com/
+
 # Quick Start 🚀
 
 ### Add a default.json file in config folder with the following
