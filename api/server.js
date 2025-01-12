@@ -18,14 +18,14 @@ connectDB();
  app.use('/api/cart',require('./routes/cart'));
 
  // Serve static assets in production
-
+ if(process.env.NODE_ENV=='production'){
     // Set Static folder
     app.use(express.static('client/dist'))
 
     app.get('*',(req,res)=>{
         res.sendFile(path.resolve(__dirname,'client','dist','index.html'))
     })
-
+ }
 
 
 app.listen(PORT,()=>console.log(`Server running on port ${PORT}`));
