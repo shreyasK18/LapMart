@@ -1,8 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import PropTypes from 'prop-types'
 import currencyFormatter  from '../../utilities/currencyFormatter';
-const ListItem = ({item:{category,image,name,price,_id}}) => {
+const ListItem = ({item:{image,name,price,_id}}) => {
  
         return (
             <div className="col-md-4 col-sm-12 col-lg-4 col-xl-4 my-3">
@@ -20,10 +19,5 @@ const ListItem = ({item:{category,image,name,price,_id}}) => {
  } 
 
 
-
-ListItem.propTypes = {
-    item:PropTypes.object.isRequired,
-    
-}
 
 export default ListItem

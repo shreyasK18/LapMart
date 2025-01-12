@@ -1,25 +1,23 @@
 import axios from 'axios';
-import { ADD_CART, REMOVE_CART ,CART_ERROR, ADD_ITEM_TO_CART, REMOVE_ITEM_FROM_CART, GET_CART,ORDER_CART} from './types';
-
+import { getCartFromReducer,
+    addCartFromReducer,
+    removeCartFromReducer,
+    cartErrorFromReducer,
+    addItemToCartFromReducer,
+    removeItemFromCartFromReducer,
+    orderCartFromReducer, } from '../reducers/cart';
 export const getCart = (id) =>async dispatch =>{
     try {
        
         const res =await axios.get(`/api/cart/${id}`);
-
-        dispatch({
-            type:GET_CART,
-            payload:res.data
-        });
+        
+        dispatch(getCartFromReducer(res.data))
         
     } catch (err) {
-       
-        dispatch({
-            type:CART_ERROR,
-            payload:{
-                msg:err.response.statusText,
-                status:err.response.status
-            }
-        });
+        dispatch(cartErrorFromReducer({
+                    msg:err.response.statusText,
+                    status:err.response.status
+                }));
     }
 }
 export const addCart = (id,price) =>async dispatch =>{
@@ -37,21 +35,14 @@ export const addCart = (id,price) =>async dispatch =>{
             
         }
         const res =await axios.post(`/api/cart`,items,config);
-
-        dispatch({
-            type:ADD_CART,
-            payload:res.data
-        });
+        dispatch(addCartFromReducer(res.data));
         
     } catch (err) {
-       
-        dispatch({
-            type:CART_ERROR,
-            payload:{
-                msg:err.response.statusText,
-                status:err.response.status
-            }
-        });
+        console.log(err);
+        dispatch(cartErrorFromReducer({
+            msg:err.response.statusText,
+            status:err.response.status
+        }));
     }
 }
 export const addItemToCart = (id,itemid,price) =>async dispatch =>{
@@ -67,21 +58,13 @@ export const addItemToCart = (id,itemid,price) =>async dispatch =>{
             price
         }
         const res =await axios.put(`/api/cart/additem/${id}`,item,config);
-
-        dispatch({
-            type:ADD_ITEM_TO_CART,
-            payload:res.data
-        });
+        dispatch(addItemToCartFromReducer(res.data));
         
     } catch (err) {
-       
-        dispatch({
-            type:CART_ERROR,
-            payload:{
-                msg:err.response.statusText,
-                status:err.response.status
-            }
-        });
+        dispatch(cartErrorFromReducer({
+            msg:err.response.statusText,
+            status:err.response.status
+        }));
     }
 }
 
@@ -89,18 +72,13 @@ export const removeItemFromCart = (itemID) =>async dispatch =>{
     try {
         
         const res=await axios.delete(`/api/cart/removeitem/${itemID}`);
-        dispatch({
-            type:REMOVE_ITEM_FROM_CART,
-            payload:res.data
-        });
+       
+        dispatch(removeItemFromCartFromReducer(res.data));
     } catch (err) {
-        dispatch({
-            type:CART_ERROR,
-            payload:{
-                msg:"Bad Request",
-                status:400
-            }
-        });
+        dispatch(cartErrorFromReducer({
+            msg:"Bad Request",
+            status:400
+        }));
     } 
 }
 export const orderCart = (name,credit,ship_ad,agree,id) =>async dispatch =>{
@@ -118,18 +96,12 @@ export const orderCart = (name,credit,ship_ad,agree,id) =>async dispatch =>{
             credit:credit
         }
         const res=await axios.put(`/api/cart/order/${id}`,order_details,config);
-        dispatch({
-            type:ORDER_CART,
-            payload:res.data
-        });
+        dispatch(orderCartFromReducer(res.data));
     } catch (err) {
-        dispatch({
-            type:CART_ERROR,
-            payload:{
-                msg:"Bad Request",
-                status:400
-            }
-        });
+        dispatch(cartErrorFromReducer({
+            msg:"Bad Request",
+            status:400
+        }));
     } 
 }
 export const removeCart = (id) =>async dispatch =>{
@@ -145,17 +117,11 @@ export const removeCart = (id) =>async dispatch =>{
        
       axios.delete(`/api/cart/`,cartid,config);
         
-        dispatch({
-            type:REMOVE_CART,
-            payload:id
-        });
+        dispatch(removeCartFromReducer(id));
     } catch (err) {
-        dispatch({
-            type:CART_ERROR,
-            payload:{
-                msg:"Bad Request",
-                status:400
-            }
-        });
+        dispatch(cartErrorFromReducer({
+            msg:"Bad Request",
+            status:400
+        }));
     } 
 }

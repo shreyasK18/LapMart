@@ -6,94 +6,103 @@ import {
     REMOVE_CART,
     CART_ERROR,
     CART_EMPTY,
-    ORDER_CART
-    
-} from '../actions/types';
-const initialState ={
-   items:null,
-   count:0,
-   totalPrice:0,
-   loading:true,
-   _id:null,
-   itemdetails:null,
-   ordered:false,
-   error:{}
-}
-
-
-
-export default function(state=initialState,action){
-    const { type, payload } =action;
-    switch(type){
-        case GET_CART:
-            return {
-                ...state,
-                items:payload.items,
-                count:payload.count,
-                totalPrice:payload.total_price,
-                _id:payload._id,
-                loading:false,
-                itemdetails:payload.itemdetails,
-                ordered:payload.order_status,
-                error:{}
-            }
-        case ADD_CART:
-             return {
-                    ...state,
-                    items:payload.items,
-                    count:state.count+1,
-                    totalPrice:payload.total_price,
-                    loading:false,
-                    _id:payload._id,
-                    error:{}  
-                }
-        case ADD_ITEM_TO_CART:
-            return {
-                ...state,
-                items:payload.items,
-                totalPrice:payload.total_price,
-                count:state.count+1,
-                loading:false,
-                error:{}
-        }
-        case REMOVE_ITEM_FROM_CART:
-             return {
-                    ...state,
-                    items:state.items.filter(it=>it._id!==payload.id),
-                    itemsdetails:state.itemsdetails.filter(it=>it._id!==payload.id),
-
-                    totalPrice:payload.total_price,
-                    count:state.count-1,
-                    loading:false
-                }
-        case CART_ERROR:
-            return {
-                ...state,
-                error:payload,
-                loading:false
-            }
-        case CART_EMPTY:
-            return {
-            ...state,
-            items:[],
-            itemdetails:[],
-            _id:null
-            }
-        case REMOVE_CART:
-            return {
-                ...state,
-                items:[],
-                itemdetails:[],
-                _id:null,
-                count:0,
-                ordered:false
-            };
-        case ORDER_CART:
-            return {
-                ...state,
-                ordered:payload.order_status
-            }
-        default: return state
-    }
-
-}
+    ORDER_CART,
+  } from '../actions/types';
+  
+  import { createSlice } from '@reduxjs/toolkit';
+  
+  // Initial State
+  const initialState = {
+    items: null,
+    count: 0,
+    totalPrice: 0,
+    loading: true,
+    _id: null,
+    itemdetails: null,
+    ordered: false,
+    error: {},
+  };
+  
+  // Utility Functions
+  const filterItemsById = (items, id) => items.filter((it) => it._id !== id);
+  
+  // Create Slice
+  export const cartSlice = createSlice({
+    name: 'cart',
+    initialState,
+    reducers: {
+      getCartFromReducer(state, action) {
+        const payload = action.payload;
+        state.items = payload.items;
+        state.count = payload.count;
+        state.totalPrice = payload.total_price;
+        state._id = payload._id;
+        state.loading = false;
+        state.itemdetails = payload.itemdetails;
+        state.ordered = payload.order_status;
+        state.error = {};
+      },
+      addCartFromReducer(state, action) {
+        const payload = action.payload;
+        state.items = payload.items;
+        state.count += 1;
+        state.totalPrice = payload.total_price;
+        state._id = payload._id;
+        state.loading = false;
+        state.error = {};
+      },
+      addItemToCartFromReducer(state, action) {
+        const payload = action.payload;
+        state.items = payload.items;
+        state.totalPrice = payload.total_price;
+        state.count += 1;
+        state.loading = false;
+        state.error = {};
+      },
+      removeItemFromCartFromReducer(state, action) {
+        const payload = action.payload;
+        state.items = filterItemsById(state.items, payload.id);
+        state.itemdetails = filterItemsById(state.itemdetails, payload.id);
+        state.totalPrice = payload.total_price;
+        state.count -= 1;
+        state.loading = false;
+      },
+      cartErrorFromReducer(state, action) {
+        const payload = action.payload;
+        state.error = payload;
+        state.loading = false;
+      },
+      cartEmptyFromReducer(state) {
+        state.items = [];
+        state.itemdetails = [];
+        state._id = null;
+      },
+      removeCartFromReducer(state) {
+        state.items = [];
+        state.itemdetails = [];
+        state._id = null;
+        state.count = 0;
+        state.ordered = false;
+      },
+      orderCartFromReducer(state, action) {
+        const payload = action.payload;
+        state.ordered = payload.order_status;
+      },
+    },
+  });
+  
+  // Export Actions
+  export const {
+    getCartFromReducer,
+    addCartFromReducer,
+    addItemToCartFromReducer,
+    removeItemFromCartFromReducer,
+    cartErrorFromReducer,
+    cartEmptyFromReducer,
+    removeCartFromReducer,
+    orderCartFromReducer,
+  } = cartSlice.actions;
+  
+  // Export Reducer
+  export default cartSlice.reducer;
+  

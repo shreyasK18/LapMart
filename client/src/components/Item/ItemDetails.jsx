@@ -1,36 +1,45 @@
 import React,{ useEffect,useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { useNavigate,Link,useParams  } from 'react-router-dom';
 import { getItem } from '../../actions/items';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Spinner from '../layouts/Spinner';
 import AddItemModal from '../Utilities/Modals/AddItemModal';
-import { addItemToCart,addCart, getCart } from '../../actions/cart';
+import { addItemToCart,addCart } from '../../actions/cart';
 import currencyFormatter  from '../../utilities/currencyFormatter';
+import { useDispatch, useSelector } from 'react-redux';
 
-const ItemDetails = ({match,getItem,items:{item,error,loading},addItemToCart,addCart,cart:{_id},getCart})=> {
+
+const ItemDetails = ()=> {
     const [addButtonState,setAddButtonState]=useState(false);
+    const {id} = useParams();
     const [scrollUp,setScrollUp]=useState(false);
-    const history=useHistory();
+    const dispatch=useDispatch();
+    const cart=useSelector(state=> state.cart);
+    const items=useSelector(state=>state.items)
+     const { item,error,loading}=items;
+     const {_id}=cart;
+    const history=useNavigate();
 
     const addToCart = () =>{
         setAddButtonState(!addButtonState);
         if(_id!==null && _id!==undefined){
-            addItemToCart(_id,item._id,item.price);
+        
+            dispatch(addItemToCart(_id,item._id,item.price));
         } else {
-            addCart(item._id,item.price);
+
+            dispatch(addCart(item._id,item.price));
         }
-       getCart(_id);
+   
     }
     
         
         
     
     useEffect(()=>{
-        getItem(match.params.id);
-    },[item])
-  
+        dispatch(getItem(id));
+    },[id])
+
+   
+
     if (item!==null && loading===false)  {
         if(scrollUp===false){
             window.scrollTo(0,0);
@@ -74,15 +83,15 @@ const ItemDetails = ({match,getItem,items:{item,error,loading},addItemToCart,add
     
 }
 
-ItemDetails.propTypes = {
-  addItemToCart:PropTypes.func.isRequired,
-  addCart:PropTypes.func.isRequired,
-  getItems:PropTypes.func.isRequired,
-  items:PropTypes.object.isRequired,
-  currencyFormatter:PropTypes.func.isRequired,
-}
-const mapStateToProps= state =>({
-    items:state.items,
-    cart:state.cart
-});
-export default connect(mapStateToProps,{getItem,addItemToCart,addCart,getCart})(ItemDetails)
+// ItemDetails.propTypes = {
+//   addItemToCart:PropTypes.func.isRequired,
+//   addCart:PropTypes.func.isRequired,
+// //   getItems:PropTypes.func.isRequired,
+//   items:PropTypes.object.isRequired,
+//   currencyFormatter:PropTypes.func.isRequired,
+// }
+// const mapStateToProps= state =>({
+//     items:state.items,
+//     cart:state.cart
+// });
+export default ItemDetails

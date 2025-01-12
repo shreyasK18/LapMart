@@ -1,13 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { removeCart } from '../../../actions/cart';
 
-const OrderdedItemsModal = ({setState,state,id,removeCart}) => {
-   
+const OrderdedItemsModal = ({setState,state,id}) => {
+   const dispatch=useDispatch();
     const redirect =() =>{
        
       
-        removeCart(id);
+        dispatch(removeCart(id));
         
     }
     const closeBtn=()=>{
@@ -32,7 +32,7 @@ const OrderdedItemsModal = ({setState,state,id,removeCart}) => {
                             </div>
                             <div className="modal-body d-flex flex-wrap add-body">
                                 <div className="col-sm-12 col-md-12 col-lg-12 modal-button">
-                                    <button type="button" className="btn btn-secondary btn-block close-modal" onClick={()=>   redirect()}>Continue Shopping with new Cart</button>
+                                    <button type="button" className="btn btn-secondary btn-block close-modal " onClick={()=>   redirect()}>Continue shopping with new cart</button>
                                 </div>
                                
                              </div>
@@ -44,4 +44,4 @@ const OrderdedItemsModal = ({setState,state,id,removeCart}) => {
 
 
 
-export default connect(null,{removeCart})(OrderdedItemsModal)
+export default OrderdedItemsModal

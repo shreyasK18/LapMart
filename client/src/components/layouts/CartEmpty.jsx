@@ -1,9 +1,8 @@
-import React,{ Fragment } from 'react'
 import { Link } from 'react-router-dom';
 
 const CartEmpty = props => {
     return (
-        <Fragment>
+    
           <div className="container">
             <div className="row">
               <div className="col-md-12 center p-5 view-65">
@@ -15,7 +14,6 @@ const CartEmpty = props => {
               </div>
             </div>
           </div>
-        </Fragment>
       );
 }
 

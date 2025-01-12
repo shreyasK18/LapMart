@@ -1,17 +1,17 @@
 import React,{ Fragment, useEffect,useState} from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import { getCart} from '../../actions/cart';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Spinner from './Spinner';
 import RemoveItemConfirm from '../Utilities/Modals/RemoveItemConfirm';
 import currencyFormatter  from '../../utilities/currencyFormatter';
 import CartEmpty from './CartEmpty';
-const Cart = ({ cart:{totalPrice,itemdetails,count,_id,items },getCart}) => {
-    useEffect(() => {
-        getCart(_id);
-     },[items
-    ])
+const Cart = () => {
+    const dispatch=useDispatch();
+   
+    const cart=useSelector((state)=>state.cart)
+    const {totalPrice,itemdetails,count,_id,items}=cart;
+    
     const [removeButtonState,setRemoveButtonState]=useState(false);
     const [itemData,setItemData]=useState({
         name:'',
@@ -23,14 +23,26 @@ const Cart = ({ cart:{totalPrice,itemdetails,count,_id,items },getCart}) => {
     }
 
     const removeItem=(id,name)=>{
+       
+        
         setItemData({name,id});
         setRemoveButtonState(!removeButtonState);
+        
+    
+
+       
     }
     const {name,id}=itemData;
-
+    useEffect(() => {
+       
+        dispatch(getCart(_id));
+        
+        
+     },[
+    ])
     
    
-    return itemdetails!==null && count!==0 ?(
+     if(itemdetails!==null && count!==0) return (
         <section>
             { removeButtonState && <RemoveItemConfirm name={name} id={id}  modal={removeButtonState} setModal={setRemoveButtonState}/> }
 
@@ -45,7 +57,7 @@ const Cart = ({ cart:{totalPrice,itemdetails,count,_id,items },getCart}) => {
                     <div className="p-3">
                 
                         <div className="container px-4 border rounded-lg shadow">
-                            {itemdetails && itemdetails.map(item=><Fragment>
+                            { itemdetails?.map((item)=><Fragment key={item._id}>
                                 <div className="row ">
                                     <div className="col-sm-4 col-md-4 col-lg-4 p-4 text-center">
                                         <img src={process.env.PUBLIC_URL + `/img/${item.image}`} alt={item.image} className="fit p-2"/>
@@ -69,7 +81,7 @@ const Cart = ({ cart:{totalPrice,itemdetails,count,_id,items },getCart}) => {
            
                 <div className="container d-flex justify-content-between align-items-center px-0">
                     <div>
-                        <h5 classname="p-3">Cart Total: <span className="text-secondary">{currencyFormatter(totalPrice)}</span></h5>
+                        <h5 className="p-3">Cart Total: <span className="text-secondary">{currencyFormatter(totalPrice)}</span></h5>
                     </div>
                     <div>
                         <Link to={`/checkout/${_id}`} className="btn btn-primary" style={{textDecoration:'none'}}>Checkout</Link>
@@ -77,17 +89,10 @@ const Cart = ({ cart:{totalPrice,itemdetails,count,_id,items },getCart}) => {
                 </div>
                 </div>
             </div>
-    </section>
-    ):( count===0 ? (<CartEmpty/>)  :  (<Spinner/>))
+    </section>)
+    else if(count===0)  { return <CartEmpty/>  }
+    else { return <Spinner/>}
+    
 }
 
-Cart.propTypes = {
-    cart:PropTypes.object.isRequired,
-    getCart:PropTypes.func.isRequired,
-    currencyFormatter:PropTypes.func.isRequired,
-}
-const mapStateToProps = state => ({
-    cart:state.cart
-    
-});
-export default connect(mapStateToProps,{getCart})(Cart)
+export default Cart

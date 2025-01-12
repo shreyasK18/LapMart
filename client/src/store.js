@@ -1,16 +1,15 @@
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
-import rootReducer from './reducers';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { cartSlice } from './reducers/cart';
+import { itemsSlice } from './reducers/items';
 
-const initialState={};
+// Use the reducer functions from the slices
+const rootReducer = combineReducers({
+  items: itemsSlice.reducer, // Access only the reducer from the slice
+  cart: cartSlice.reducer,   // Access only the reducer from the slice
+});
 
-const middleware=[thunk];
-
-const store=createStore(
-    rootReducer,
-    initialState,
-    composeWithDevTools(applyMiddleware(...middleware))
-);
+const store = configureStore({
+  reducer: rootReducer, // Pass the combined reducers
+});
 
 export default store;

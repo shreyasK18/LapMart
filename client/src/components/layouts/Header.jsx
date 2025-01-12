@@ -1,8 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-const Header = ({count}) => {
+import { useSelector} from 'react-redux';
+
+const Header = () => {
+  const count=useSelector(state=>state.cart.count)
     return (
       <header>
         <nav className="navbar ">
@@ -19,10 +20,4 @@ const Header = ({count}) => {
     )
 }
 
-Header.propTypes = {
-  count:PropTypes.number.isRequired
-}
-const mapStateToProps= state =>({
-  count:state.cart.count
-});
-export default connect(mapStateToProps)(Header);
+export default Header;

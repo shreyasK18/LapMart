@@ -11,7 +11,9 @@ const Carousal = props => {
             </ol>
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                    <img src={process.env.PUBLIC_URL + 'img/olena-sergienko-NeVzNhylAnU-unsplash.jpg'} className="d-block w-100" alt="image1"/>
+                    <img src={
+                        process.env.PUBLIC_URL +
+                         'img/olena-sergienko-NeVzNhylAnU-unsplash.jpg'} className="d-block w-100" alt="image1"/>
                     <div className="carousel-caption ">
                         <h5>Exclusive Laptops</h5>
                         <p>Laptop with exclusive features</p>

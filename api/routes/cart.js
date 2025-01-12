@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 const Cart=require('../../models/cart');
 const config=require('config');
 const Item = require('../../models/item');
+const { ObjectId } = require('mongodb');
 
 // NOTE: You need to replace the  request cartid by 
 //       by getting the cart id details from req.session
@@ -26,7 +27,7 @@ router.get('/:id',async(req,res)=>{
              cart=await Cart.aggregate([
                 {
                     $match:{
-                      _id:mongoose.Types.ObjectId(id)
+                      _id:new mongoose.Types.ObjectId(id)
                     }
                 },
                 {
@@ -52,7 +53,7 @@ router.get('/:id',async(req,res)=>{
              }
             
         } catch (err) {
-            console.log(err.message);
+          
             return res.status(500).send('Server Error');
         }
 
@@ -72,7 +73,7 @@ router.post('/',[
 ],async(req,res)=>{
     const errors=validationResult(req);
     if(!errors.isEmpty()){
-        console.log(errors);
+    
         return res.status(400).json({errors:errors.array()});
     }
    try {
@@ -92,7 +93,6 @@ router.post('/',[
     await cart.save();
     return res.json(cart);
    } catch(err) {
-      
        res.status(500).send('Server Error');
    }
 }); 
@@ -112,7 +112,6 @@ router.put('/additem/:cart_id',[
         
         const errors=validationResult(req);
             if(!errors.isEmpty()){
-                console.log(errors);
                 return res.status(400).json({errors:errors.array()});
             }
         try {

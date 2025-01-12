@@ -1,40 +1,32 @@
 
 import axios from 'axios';
-import { GET_ITEMS, GET_ITEM ,ITEM_ERROR} from './types';
+import { getItemFromReducer, getItemsFromReducer,itemError } from '../reducers/items';
 
 export const getItems =() =>async dispatch =>{
     try {
         const res =await axios.get('/api/item');
-        dispatch({
-            type:GET_ITEMS,
-            payload:res.data
-        });
+        
+        dispatch(getItemsFromReducer(
+           res.data
+        ));
+        
     } catch (err) {
-        dispatch({
-            type:ITEM_ERROR,
-            payload:{
+        dispatch(itemError({
                 msg:err.response.statusText,
                 status:err.response.status
-            }
- 
-        });
+            }));
     }
 }
-export const getItem =(id) =>async dispatch =>{
+export const getItem = (id) =>async dispatch=>{
     try {
         const res =await axios.get(`/api/item/${id}`);
-        dispatch({
-            type:GET_ITEM,
-            payload:res.data
-        });
+        dispatch(getItemFromReducer(res.data));
     } catch (err) {
-        dispatch({
-            type:ITEM_ERROR,
-            payload:{
+        dispatch(itemError({
                 msg:err.response.statusText,
                 status:err.response.status
             }
-        });
+        ));
     }
 }
 

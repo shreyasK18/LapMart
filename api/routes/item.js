@@ -14,7 +14,6 @@ router.get('/',async(req,res)=>{
         const { category } =req.body;
         let items={};
         if(category){
-            console.log(category);
              items=await Item.find({category:category});
         } else {
              items=await Item.find();
@@ -31,7 +30,6 @@ router.get('/',async(req,res)=>{
         }
         
     } catch (err) {
-        console.log(err.message);
         return res.status(500).send('Server Error');
     }
 });
@@ -47,7 +45,6 @@ router.get('/:id',async(req,res)=>{
         const item=await Item.findOne({_id:id});
         return res.json(item);
     } catch (err) {
-        console.log(err.message);
         if(err.kind==='ObjectId'){
             return res.status(400).json({msg:"Item Not Found"});
         } 

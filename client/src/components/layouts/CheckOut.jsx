@@ -1,5 +1,5 @@
 import React,{ useState } from 'react';
-import { Link,Redirect } from 'react-router-dom';
+import { Link,Navigate, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import NotFound from './NotFound';
@@ -7,6 +7,7 @@ import { getCart, orderCart, removeCart } from '../../actions/cart';
 import OrderdedItemsModal from '../Utilities/Modals/OrderdedItemsModal';
 const CheckOut = ({cart:{_id,ordered},match,orderCart,removeCart}) => {
   const [orderedState,setOrderState]=useState(false);
+  const params=useParams();
     const [formData,setFormData]=useState({
       name:'',
       shipping_address:'',
@@ -30,9 +31,9 @@ const CheckOut = ({cart:{_id,ordered},match,orderCart,removeCart}) => {
   }
    
   if(_id==null){
-    return <Redirect to="/" />
+    return <Navigate replace to="/" />
   } else {
-    return  match.params.id && match.params.id===_id ? (
+    return  params.id && params.id===_id ? (
     <section>
       {orderedState && <OrderdedItemsModal state={orderedState} setState={setOrderState} id={_id}/>}
       <div className="container py-5 fade-in">
@@ -52,7 +53,7 @@ const CheckOut = ({cart:{_id,ordered},match,orderCart,removeCart}) => {
           </div>
           <div className="form-check">
               <input  className="form-check-input" type="checkbox" id="accept-box"  value={agree}  onChange={ e => onCheck(e)} required/>
-              <label className="form-check-label my-1" for="accept-box" >I acknowledge that this submission is for demonstrative purposes.  I understand that no real purchases and payment processing will be made.<br/>By checking this box, I understand that no real personal information such as names, addresses, and credit card numbers should not be used.</label>
+              <label className="form-check-label my-1" htmlFor="accept-box" >I acknowledge that this submission is for demonstrative purposes.  I understand that no real purchases and payment processing will be made.<br/>By checking this box, I understand that no real personal information such as names, addresses, and credit card numbers should not be used.</label>
           </div>
           <div className="row align-items-center justify-content-between p-3 submit-row my-5">
             <div className="col-md-6">
