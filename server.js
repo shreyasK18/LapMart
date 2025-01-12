@@ -8,7 +8,7 @@ app.use(sessionMiddleware);
 app.use(express.json());
 
 // Create a PORT configuration
-const PORT= process.env.PORT || 5000;
+const PORT= process.env.PORT || 5001;
 
 // Make a Connection to the database
 connectDB();
