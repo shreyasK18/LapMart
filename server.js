@@ -2,7 +2,7 @@ const express=require('express');
 const app=express();
 const connectDB=require('./config/db');
 const sessionMiddleware = require('./session-middleware');
-
+const path=require('path')
 app.use(sessionMiddleware);
 // Init Middleware
 app.use(express.json());
@@ -16,5 +16,16 @@ connectDB();
 // Application Routes
  app.use('/api/item',require('./api/routes/item'));
  app.use('/api/cart',require('./api/routes/cart'));
+
+ // Serve static assets in production
+ if(process.env.NODE_ENV=='production'){
+    // Set Static folder
+    app.use(express.static('client/build'))
+
+    app.get('*',(req,res)=>{
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+    })
+ }
+
 
 app.listen(PORT,()=>console.log(`Server running on port ${PORT}`));
