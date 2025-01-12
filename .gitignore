@@ -10,3 +10,4 @@ client/eslint.config.js
 package-lock.json
 vercel.json
 
+.vercel

@@ -1,7 +1,7 @@
 const express=require('express');
 const app=express();
-const connectDB=require('./config/db');
-const sessionMiddleware = require('./session-middleware');
+const connectDB=require('../config/db');
+const sessionMiddleware = require('../session-middleware');
 const path=require('path')
 app.use(sessionMiddleware);
 // Init Middleware
