@@ -1,0 +1,28 @@
+{
+  "name": "lapmart",
+  "version": "1.0.0",
+  "description": "E-commerce website for Laptops and its accessories",
+  "main": "server.js",
+  "scripts": {
+    "start": "npm api/server",
+    "server": "node api/server",
+    "client": "npm run client --prefix ../frontend",
+    "dev": "concurrently \" npm run server \" \"npm run client \"",
+    "vercel-postbuild":"npm install  && npm install --prefix ../frontend &&  npm run server && npm run build --prefix ../frontend"
+  },
+  "author": "Shreyas Kanchan",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.3.0",
+    "config": "^3.3.3",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "express-validator": "^6.9.2",
+    "mongoose": "",
+    "nodemon": "",
+    "path": "^0.12.7",
+    "react-router-dom": "^5.2.0",
+    "requests": "^0.3.0",
+    "session-file-store": "^1.5.0"
+  }
+}
