@@ -8,7 +8,7 @@ export default defineConfig({
     proxy: {   
       '/api': {
         target: process.env.VITE_REACT_APP_BACKEND_BASEURL,
-        changeOrigin: true,
+        changeOrigin: false,
         secure: false,
       },
     },
