@@ -6,15 +6,15 @@ export default defineConfig({
   plugins: [react()],
   define:{
     'process.env':{
-      PUBLIC_URL:'/',
-      VITE_REACT_APP_BACKEND_BASEURL:'https://lap-mart-35z68c5ad-shreyas-kanchans-projects.vercel.app'
+      PUBLIC_URL:'/'
+     
     }
     
   },
   server: {
     proxy: {   
       '/api': {
-        target: 'https://lap-mart-35z68c5ad-shreyas-kanchans-projects.vercel.app',
+        target: process.env.VITE_REACT_APP_BACKEND_BASEURL,
         changeOrigin: true,
         secure: false,
       },
