@@ -2,13 +2,13 @@
   "name": "lapmart",
   "version": "1.0.0",
   "description": "E-commerce website for Laptops and its accessories",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "start": "npm server",
-    "server": "node server",
+    "server": "node index",
     "client": "npm run client --prefix ../frontend",
     "dev": "concurrently \" npm run server \" \"npm run client \"",
-    "vercel-postbuild":"npm install  && npm install --prefix ../frontend &&  npm run server && npm run build --prefix ../frontend"
+    "vercel-postbuild":"npm install  && npm install --prefix ../frontend &&  npm run server && npm run build --prefix ../../frontend"
   },
   "author": "Shreyas Kanchan",
   "license": "ISC",
