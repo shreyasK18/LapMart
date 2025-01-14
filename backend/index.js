@@ -20,14 +20,14 @@ connectDB();
  app.use('/api/cart',require('./api/routes/cart'));
  app.get('/',(req,res)=>res.send("Server is running"))
 //  Serve static assets in production
- if(process.env.NODE_ENV=='production'){
-    // Set Static folder
-    app.use(express.static('./frontend/dist'))
+//  if(process.env.NODE_ENV=='production'){
+//     // Set Static folder
+//     app.use(express.static('./frontend/dist'))
 
-    app.get('*',(req,res)=>{
-        res.sendFile(path.resolve(__dirname,'./frontend','dist','index.html'))
-    })
- }
+//     app.get('*',(req,res)=>{
+//         res.sendFile(path.resolve(__dirname,'./frontend','dist','index.html'))
+//     })
+//  }
 
 
 app.listen(PORT,()=>console.log(`Server running on port ${PORT}`));
