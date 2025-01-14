@@ -7,16 +7,12 @@ export default defineConfig({
   server: {
     proxy: {   
       '/api': {
-        target: "https://lap-mart-35z68c5ad-shreyas-kanchans-projects.vercel.app",
+        target: process.env.VITE_REACT_APP_BACKEND_BASEURL,
         changeOrigin: true,
         secure: false,
       },
     },
-  },
-  define:{
-    'process.env':{
-      PUBLIC_URL:'http://localhost:5173/'
-    }
-  },
+  }
+ 
 })
 
