@@ -8,7 +8,7 @@
     "server": "node server",
     "client": "npm run client --prefix ../frontend",
     "dev": "concurrently \" npm run server \" \"npm run client \"",
-    "vercel-postbuild":"npm install &&  npm run server"
+    "vercel-postbuild":"npm install  && npm install --prefix ../frontend &&  npm run server && npm run build --prefix ../frontend"
   },
   "author": "Shreyas Kanchan",
   "license": "ISC",
