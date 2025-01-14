@@ -22,10 +22,10 @@ connectDB();
 //  Serve static assets in production
  if(process.env.NODE_ENV=='production'){
     // Set Static folder
-    app.use(express.static('../../frontend/dist'))
+    app.use(express.static('../frontend/dist'))
 
     app.get('*',(req,res)=>{
-        res.sendFile(path.resolve(__dirname,'../../frontend','dist','index.html'))
+        res.sendFile(path.resolve(__dirname,'../frontend','dist','index.html'))
     })
  }
 
