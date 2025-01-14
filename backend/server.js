@@ -26,6 +26,7 @@ connectDB();
 
     app.get('*',(req,res)=>{
         res.sendFile(path.resolve(__dirname,'../frontend','dist','index.html'))
+        res.send("Server is Running")
     })
  }
 
