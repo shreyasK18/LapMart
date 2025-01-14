@@ -12,7 +12,11 @@ export default defineConfig({
         secure: false,
       },
     },
-  }
- 
+  },
+  define:{
+    'process.env':{
+      PUBLIC_URL:'http://localhost:5173/'
+    }
+  },
 })
 
