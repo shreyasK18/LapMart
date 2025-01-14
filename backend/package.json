@@ -4,8 +4,8 @@
   "description": "E-commerce website for Laptops and its accessories",
   "main": "server.js",
   "scripts": {
-    "start": "npm api/server",
-    "server": "node api/server",
+    "start": "npm server",
+    "server": "node server",
     "client": "npm run client --prefix ../frontend",
     "dev": "concurrently \" npm run server \" \"npm run client \"",
     "vercel-postbuild":"npm install  && npm install --prefix ../frontend &&  npm run server && npm run build --prefix ../frontend"
