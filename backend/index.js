@@ -1,10 +1,15 @@
 const express=require('express');
 const app=express();
 const connectDB=require('./config/db');
+const cors = require('cors');
 // const sessionMiddleware = require('./session-middleware');
 const path=require('path')
+app.use(cors({ origin: '/' }));
 // app.use(sessionMiddleware);
 // Init Middleware
+
+
+
 app.use(express.json());
 
 // Create a PORT configuration
