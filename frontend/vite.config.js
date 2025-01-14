@@ -15,7 +15,7 @@ export default defineConfig({
   },
   define:{
     'process.env':{
-      PUBLIC_URL:'http://localhost:5173/'
+      PUBLIC_URL:'/'
     }
   },
 })
