@@ -8,6 +8,5 @@ client/.gitignore
 client/README.md
 client/eslint.config.js
 package-lock.json
-vercel.json
 
 .vercel
