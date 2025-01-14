@@ -15,8 +15,10 @@ export default defineConfig({
   },
   define:{
     'process.env':{
-      PUBLIC_URL:'/'
+      PUBLIC_URL:'/',
+      VITE_REACT_APP_BACKEND_BASEURL:'https://lap-mart-35z68c5ad-shreyas-kanchans-projects.vercel.app'
     }
+    
   },
 })
 
