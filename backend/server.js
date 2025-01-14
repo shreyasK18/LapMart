@@ -18,7 +18,7 @@ connectDB();
 // Application Routes
  app.use('/api/item',require('./api/routes/item'));
  app.use('/api/cart',require('./api/routes/cart'));
-
+ app.get("/", (req, res) => res.send("Express on Vercel"));
  // Serve static assets in production
  if(process.env.NODE_ENV=='production'){
     // Set Static folder
@@ -26,7 +26,6 @@ connectDB();
 
     app.get('*',(req,res)=>{
         res.sendFile(path.resolve(__dirname,'../frontend','dist','index.html'))
-        res.send("Server is Running")
     })
  }
 
