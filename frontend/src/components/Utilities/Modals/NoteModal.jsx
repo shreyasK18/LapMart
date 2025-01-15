@@ -11,7 +11,7 @@ const NoteModal = ({dispatch}) => {
                        
                             <div className="modal-header modal-text pb-0">
                                 <div>
-                                   <h4 className="text-center"> Welcome to LapMart {process.env.PUBLIC_URL}</h4>
+                                   <h4 className="text-center"> Welcome to LapMart {process.env.VITE_REACT_APP_BACKEND_BASEURL}</h4>
                                     <p className="text-center">LapMart is a full-stack E-commerce application built using React.js and Node/Express and is to be used strictly for demonstrative purposes</p>
                                 </div>
                             </div>
