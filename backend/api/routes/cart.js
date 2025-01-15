@@ -203,7 +203,7 @@ router.put('/order/:cart_id',[
 // @Desc   DELETE cart item by id
 router.delete('/removeitem/:itemId',async(req,res)=>{
     try {
-        // let cart=new Cart();
+        let cart=new Cart();
         const cartid=req.session.cartid;
         const itemid=req.params.itemId;
         // Finding the cart using session
