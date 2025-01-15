@@ -2,7 +2,7 @@ const express=require('express');
 const app=express();
 const connectDB=require('./config/db');
 const cors = require('cors');
-// const sessionMiddleware = require('./session-middleware');
+const sessionMiddleware = require('./session-middleware');
 const path=require('path')
 const corsOpts = {
     origin: '*',
@@ -20,7 +20,7 @@ const corsOpts = {
     ],
   };
 app.use(cors(corsOpts));
-// app.use(sessionMiddleware);
+app.use(sessionMiddleware);
 // Init Middleware
 
 
