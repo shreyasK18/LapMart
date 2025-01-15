@@ -8,12 +8,11 @@ export default defineConfig(({mode})=>{
   console.log("Environment Variable");
   console.log(env.VITE_REACT_APP_BACKEND_BASEURL)
   return {
-  plugins: [react()],
-  define:{
-    'process.env':{
-      PUBLIC_URL:'/',
-    }  
+    plugins: [react()],
+    define:{
+      'process.env.PUBLIC_URL': JSON.stringify('/')
+      
+    }
   }
-}
 })
 
