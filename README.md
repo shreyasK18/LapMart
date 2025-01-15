@@ -17,13 +17,14 @@ Try the application live at https://lapmart-demo.herokuapp.com/
 ### Install server dependencies
 
 ```bash
+cd backend
 npm install
 ```
 
 ### Install client dependencies
 
 ```bash
-cd client
+cd frontend
 npm install
 ```
 
