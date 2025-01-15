@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import { getItemFromReducer, getItemsFromReducer,itemError } from '../reducers/items';
-const apiBaseUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
+const apiBaseUrl = 'https://lap-mart-pscqmuo2g-shreyas-kanchans-projects.vercel.app';
 export const getItems =() =>async dispatch =>{
     try {
         const res =await axios.get(`${apiBaseUrl}/api/item`);
