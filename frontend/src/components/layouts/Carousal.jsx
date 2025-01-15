@@ -20,14 +20,14 @@ const Carousal = props => {
                     </div>
                 </div>
                 <div className="carousel-item">
-                    <img src={ 'img/parker-johnson-HK27KAql34A-unsplash.jpg'} className="d-block w-100" alt="image2"/>
+                    <img src={ process.env.PUBLIC_URL + 'img/parker-johnson-HK27KAql34A-unsplash.jpg'} className="d-block w-100" alt="image2"/>
                     <div className="carousel-caption ">
                         <h5>Best Price</h5>
                         <p>Will provide Laptop and its Accessories at affordable price</p>
                     </div>
                 </div>
                 <div className="carousel-item">
-                    <img src={ 'img/carousal_image_3.jpg'} className="d-block w-100" alt="image3"/>
+                    <img src={ process.env.PUBLIC_URL+'img/carousal_image_3.jpg'} className="d-block w-100" alt="image3"/>
                     <div className="carousel-caption ">
                         <h5>Accessories</h5>
                         <p>We also sell chargers and batteries of the laptop</p>
