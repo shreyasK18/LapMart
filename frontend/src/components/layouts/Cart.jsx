@@ -60,7 +60,7 @@ const Cart = () => {
                             { itemdetails?.map((item)=><Fragment key={item._id}>
                                 <div className="row ">
                                     <div className="col-sm-4 col-md-4 col-lg-4 p-4 text-center">
-                                        <img src={process.env.PUBLIC_URL + `/img/${item.image}`} alt={item.image} className="fit p-2"/>
+                                        <img src={ `/img/${item.image}`} alt={item.image} className="fit p-2"/>
                                     </div>
                                     <div className="col-sm-8 col-md-8 col-lg-8 d-flex align-items-center summary py-4">
                                         <div className="cart-item-text">

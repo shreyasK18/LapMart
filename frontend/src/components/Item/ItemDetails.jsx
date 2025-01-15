@@ -56,7 +56,7 @@ const ItemDetails = ()=> {
                     </div>
                     <div className="row pb-3">
                         <div className="col-xl-5 col-lg-12 px-3 pb-3 text-center">
-                            <img src={process.env.PUBLIC_URL + `/img/${item.image}`} alt={item.image} className="fit"/>
+                            <img src={ `/img/${item.image}`} alt={item.image} className="fit"/>
                         </div>
                         <div className="col-lg-7 pb-3 d-flex align-items-center">
                             <div className="details-text"><h5>{item.name}</h5><h6 className="text-muted">{currencyFormatter(item.price)}</h6>

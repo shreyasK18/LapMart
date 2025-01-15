@@ -4,7 +4,7 @@ import { getItemFromReducer, getItemsFromReducer,itemError } from '../reducers/i
 const apiBaseUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 export const getItems =() =>async dispatch =>{
     try {
-        const res =await axios.get('/api/item');
+        const res =await axios.get(`${apiBaseUrl}/api/item`);
         
         dispatch(getItemsFromReducer(
            res.data
@@ -19,7 +19,7 @@ export const getItems =() =>async dispatch =>{
 }
 export const getItem = (id) =>async dispatch=>{
     try {
-        const res =await axios.get(`/api/item/${id}`);
+        const res =await axios.get(`${apiBaseUrl}/api/item/${id}`);
         dispatch(getItemFromReducer(res.data));
     } catch (err) {
         dispatch(itemError({
