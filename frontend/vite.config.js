@@ -1,12 +1,14 @@
-import { defineConfig } from 'vite'
+import { defineConfig,loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({mode})=>{
+  const env=loadEnv(mode,process.cwd(),'')
+  return {
   plugins: [react()],
   define:{
     'process.env':{
-      PUBLIC_URL:'dfkldf',
+      PUBLIC_URL:'/',
       VITE_REACT_APP_BACKEND_BASEURL:'https://lap-mart-35z68c5ad-shreyas-kanchans-projects.vercel.app'
     }
     
@@ -14,12 +16,13 @@ export default defineConfig({
   server: {
     proxy: {   
       '/api': {
-        target: process.env.VITE_REACT_APP_BACKEND_BASEURL,
+        target: env.VITE_REACT_APP_BACKEND_BASEURL,
         changeOrigin: true,
         secure: false,
       },
     },
   },
   
+}
 })
 
