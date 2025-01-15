@@ -6,10 +6,11 @@ import { getCartFromReducer,
     addItemToCartFromReducer,
     removeItemFromCartFromReducer,
     orderCartFromReducer, } from '../reducers/cart';
+const apiBaseUrl = import.meta.env.VITE_REACT_APP_BACKEND_BASEURL;
 export const getCart = (id) =>async dispatch =>{
     try {
        
-        const res =await axios.get(`/api/cart/${id}`);
+        const res =await axios.get(`${apiBaseUrl}/api/cart/${id}`);
         
         dispatch(getCartFromReducer(res.data))
         
@@ -34,7 +35,7 @@ export const addCart = (id,price) =>async dispatch =>{
                 price:price
             
         }
-        const res =await axios.post(`/api/cart`,items,config);
+        const res =await axios.post(`${apiBaseUrl}/api/cart`,items,config);
         dispatch(addCartFromReducer(res.data));
         
     } catch (err) {
@@ -57,7 +58,7 @@ export const addItemToCart = (id,itemid,price) =>async dispatch =>{
             count:1,
             price
         }
-        const res =await axios.put(`/api/cart/additem/${id}`,item,config);
+        const res =await axios.put(`${apiBaseUrl}/api/cart/additem/${id}`,item,config);
         dispatch(addItemToCartFromReducer(res.data));
         
     } catch (err) {
@@ -71,7 +72,7 @@ export const addItemToCart = (id,itemid,price) =>async dispatch =>{
 export const removeItemFromCart = (itemID) =>async dispatch =>{
     try {
         
-        const res=await axios.delete(`/api/cart/removeitem/${itemID}`);
+        const res=await axios.delete(`${apiBaseUrl}/api/cart/removeitem/${itemID}`);
        
         dispatch(removeItemFromCartFromReducer(res.data));
     } catch (err) {
@@ -95,7 +96,7 @@ export const orderCart = (name,credit,ship_ad,agree,id) =>async dispatch =>{
             agreed_terms:agree,
             credit:credit
         }
-        const res=await axios.put(`/api/cart/order/${id}`,order_details,config);
+        const res=await axios.put(`${apiBaseUrl}/api/cart/order/${id}`,order_details,config);
         dispatch(orderCartFromReducer(res.data));
     } catch (err) {
         dispatch(cartErrorFromReducer({
@@ -115,7 +116,7 @@ export const removeCart = (id) =>async dispatch =>{
             cartid:id
         }
        
-      axios.delete(`/api/cart/`,cartid,config);
+      axios.delete(`${apiBaseUrl}/api/cart/`,cartid,config);
         
         dispatch(removeCartFromReducer(id));
     } catch (err) {
