@@ -12,19 +12,8 @@ export default defineConfig(({mode})=>{
   define:{
     'process.env':{
       PUBLIC_URL:'/',
-    }
-    
-  },
-  server: {
-    proxy: {   
-      '/api': {
-        target: env.VITE_REACT_APP_BACKEND_BASEURL,
-        changeOrigin: true,
-        secure: false,
-      },
-    },
-  },
-  
+    }  
+  }
 }
 })
 
