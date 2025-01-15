@@ -4,7 +4,21 @@ const connectDB=require('./config/db');
 const cors = require('cors');
 // const sessionMiddleware = require('./session-middleware');
 const path=require('path')
-app.use(cors({ origin: '/' }));
+const corsOpts = {
+    origin: '*',
+  
+    methods: [
+      'GET',
+      'POST',
+      'PUT',
+      'DELETE'
+    ],
+  
+    allowedHeaders: [
+      'Content-Type',
+    ],
+  };
+app.use(cors(corsOpts));
 // app.use(sessionMiddleware);
 // Init Middleware
 
