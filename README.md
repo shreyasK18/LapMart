@@ -28,7 +28,8 @@ cd frontend
 npm install
 ```
 
-### Run both Express & React from root
+### Run both Express & React from backend folder
 
 ```bash
+
 npm run dev
