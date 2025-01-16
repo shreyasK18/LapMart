@@ -3,16 +3,6 @@ import { createSlice } from '@reduxjs/toolkit';
 // Initial State
 const initialState = {
   items: [
-    {
-      id: 1,
-      name: 'djfj',
-      description: 'dfjhdjf',
-      category: 'Laptop',
-      price: 100,
-      image: 'dflkfo.jpg',
-      title: 'dfkfk',
-      count: 1,
-    },
   ],
   item: null,
   cart: [],
