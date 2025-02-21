@@ -6,12 +6,12 @@ Try the application live at https://lap-mart-xitu-git-main-shreyas-kanchans-proj
 
 # Quick Start 🚀
 
-### Add a default.json file in config folder with the following
+### Add a .env file in backend folder with the following
 
 ```
-{
-  "mongoURI": "<your_mongoDB_Atlas_uri_with_credentials>"
-}
+
+  NODE_CONFIG_DIR=<your_mongoDB_Atlas_uri_with_credentials>
+
 ```
 
 ### Install server dependencies
